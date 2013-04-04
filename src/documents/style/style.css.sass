@@ -2,16 +2,23 @@
 @import compass/reset
 
 // Development mode:
-$dev : true
+$dev : false
 
 //------------------------------------------------------------------------
 // Variables:
 //------------------------------------------------------------------------
 
-
 $direction : rtl
 $background : url(/test_images/main-back_1.gif) repeat 0 0
 $list_image : url('/test_images/bluesmallstar.gif')
+
+// A4 Page: 
+
+$width: 210mm
+$height: 297mm
+$padding: 5mm
+
+//------------------------------------------------------------------------
 
 @function dir ()
 	@if $direction == ltr  
@@ -27,13 +34,6 @@ $list_image : url('/test_images/bluesmallstar.gif')
 
 $dir  : dir()
 $udir : udir()
-
-// A4 Page: 
-
-$width: 210mm
-$height: 297mm
-$padding: 5mm
-
 
 //------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ body
 @for $i from 1 through 6
 	@for $x from 1 through 6
 		@if $i < $x or ($i == 1 and $x == 1)
-			.sp#{$i}-#{$x}
+			.sp-#{$i}-#{$x}
 				float: $dir
 				width: 100%  * ( $i / $x )
 				@if $dev
@@ -97,7 +97,7 @@ body
 @for $x from 1 through 20
 
 	$mul : 5
-	.h#{$x* $mul}
+	.h-#{$x* $mul}
 
 		$h: ( $height - ( $padding * 2 ) ) * ($x * $mul / 100)				
 		
@@ -124,8 +124,9 @@ body
 
 $mainColor: hsla(162, 21%, 90%, 0.5)
 
-.bg 
+.bg div
 	background: $mainColor
+	background-clip: content-box
 
 .box 
 	border: 3px solid $mainColor
