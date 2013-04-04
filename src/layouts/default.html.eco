@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title><%= @document.title %></title>
+    <link rel="stylesheet" href="style/style.css">
+    <%- @getBlock("meta").toHTML() %>
+    <%- @getBlock("styles").toHTML() %>
+</head>
+<body>
+    <%- @content %>
+    <%- @getBlock("scripts").toHTML() %>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "A4-Page.docpad",
+  "version": "0.1.0",
+  "private": true,
+  "description": "a page layout framework to fastly design pages for printing",
+  "author": "Ilan Frumer <ilanfrumer@gmail.com>",
+  "maintainers": [
+    "Ilan Frumer <ilanfrumer@gmail.com>",
+  ],
+  "contributors": [
+    "Ilan Frumer <ilanfrumer@gmail.com>",
+  ],
+  "bugs": {
+    "url": "https://github.com/ilanfrumer/A4-Page.docpad/issues"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/ilanfrumer/A4-Page.docpad.git"
+  },
+  "dependencies": {
+    "docpad": "6.x",
+    "docpad-plugin-eco": "~2.0.2",
+    "docpad-plugin-sass": "~2.4.3",
+    "docpad-plugin-jade": "~2.3.1"
+  },
+  "devDependencies": {}
+}

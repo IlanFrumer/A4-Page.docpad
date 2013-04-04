@@ -1,0 +1,176 @@
+@import compass
+@import compass/reset
+
+// Development mode:
+$dev : true
+
+//------------------------------------------------------------------------
+// Variables:
+//------------------------------------------------------------------------
+
+
+$direction : rtl
+$background : url(/test_images/main-back_1.gif) repeat 0 0
+$list_image : url('/test_images/bluesmallstar.gif')
+
+@function dir ()
+	@if $direction == ltr  
+		@return left
+	@if $direction == rtl  
+		@return right
+
+@function udir ()
+	@if $direction == rtl
+		@return left
+	@if $direction == ltr  
+		@return right
+
+$dir  : dir()
+$udir : udir()
+
+// A4 Page: 
+
+$width: 210mm
+$height: 297mm
+$padding: 5mm
+
+
+//------------------------------------------------------------------------
+
+*
+	-moz-box-sizing: border-box
+	-webkit-box-sizing: border-box
+	box-sizing: border-box
+
+body
+	direction: $direction
+	background: $background
+	
+	
+
+#a4
+	width: $width
+	height: $height
+	padding: $padding
+	overflow: hidden
+	text-align: center	
+
+	@if $dev
+		margin: 0px auto
+		border: 1px solid #000
+	@else
+		margin: 10px auto
+		box-shadow: 0px 0px 20px black
+	
+
+// ---------------
+// General Styles:
+// ---------------
+
+@for $i from 1 through 6
+	@for $x from 1 through 6
+		@if $i < $x or ($i == 1 and $x == 1)
+			.sp#{$i}-#{$x}
+				float: $dir
+				width: 100%  * ( $i / $x )
+				@if $dev
+					border: 3px dotted rgba(0,0,0,0.5)
+
+
+@for $i from 1 through 10
+	.p-#{$i}
+		width : $width - ($padding * 2) + $i*1mm
+		margin-left: auto
+		margin-right: auto
+		//width: 100%
+	.p-#{$i}>div
+		padding-#{$udir}: $i*1mm
+
+	.m-t-#{$i}>div
+		margin-top:    $i*1mm
+	.m-b-#{$i}>div
+		margin-bottom: $i*1mm
+	.m-#{$i}>div
+		margin-top:    $i*1mm
+		margin-bottom: $i*1mm 
+
+@for $x from 1 through 20
+
+	$mul : 5
+	.h#{$x* $mul}
+
+		$h: ( $height - ( $padding * 2 ) ) * ($x * $mul / 100)				
+		
+		&>div
+			height: $h
+			line-height: $h
+
+			@if $dev
+				background: rgba(255,0,0,0.2)		
+
+
+// ---------------
+// Special Styles:
+// ---------------
+
+.hr
+	height: 4mm
+	border-top-right-radius: 10mm
+	border-top-left-radius: 10mm
+
+.bdrs 
+	
+	border-top-#{$dir}-radius: 10mm
+
+$mainColor: hsla(162, 21%, 90%, 0.5)
+
+.bg 
+	background: $mainColor
+
+.box 
+	border: 3px solid $mainColor
+	border-top: 0px
+	background: hsla(0,100%,100%,0.2)
+	border-top: 1px solid gray
+
+.nv
+	margin: 0
+
+
+// Lists:
+
+ul , ol
+	text-align : $dir
+	line-height: 1
+
+.dotted-hr li:not(:last-of-type)
+	border-bottom: 1px dotted black
+	clear: both
+	overflow: auto
+
+
+.bullet
+	list-style-image: $list_image
+	list-style-position: inside
+
+	li
+		padding: 1mm 2mm
+
+
+.cc
+	position: relative
+	font-weight: bold
+
+.cc:after
+	content: ":"
+	position: absolute
+	left: 5px
+
+
+h1
+	font-size: 25px
+	text-shadow: 1px 1px 5px gray
+
+h2
+	font-size: 20px
+	text-shadow: 1px 1px 5px gray
