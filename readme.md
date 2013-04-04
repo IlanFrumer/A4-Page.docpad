@@ -18,3 +18,8 @@ A design framework of printed pages.
 1. [Open http://localhost:9778/](http://localhost:9778/)
 
 1. Start hacking away by modifying the `src` directory
+
+
+# Notes
+
+The background-clip property is not supported in Internet Explorer 8 and earlier versions.

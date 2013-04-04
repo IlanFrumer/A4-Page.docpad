@@ -16,7 +16,7 @@ $list_image : url('/test_images/bluesmallstar.gif')
 
 $width: 210mm
 $height: 297mm
-$padding: 5mm
+$padding: 10mm
 
 //------------------------------------------------------------------------
 
@@ -44,9 +44,7 @@ $udir : udir()
 
 body
 	direction: $direction
-	background: $background
-	
-	
+	background: $background	
 
 #a4
 	width: $width
@@ -62,10 +60,9 @@ body
 		margin: 10px auto
 		box-shadow: 0px 0px 20px black
 	
-
-// ---------------
+//------------------------------------------------------------------------
 // General Styles:
-// ---------------
+//------------------------------------------------------------------------
 
 @for $i from 1 through 6
 	@for $x from 1 through 6
@@ -74,7 +71,7 @@ body
 				float: $dir
 				width: 100%  * ( $i / $x )
 				@if $dev
-					border: 3px dotted rgba(0,0,0,0.5)
+					border: 3px dotted rgba(0,0,0,0.8)
 
 
 @for $i from 1 through 10
@@ -109,9 +106,35 @@ body
 				background: rgba(255,0,0,0.2)		
 
 
-// ---------------
+//------------------------------------------------------------------------
 // Special Styles:
-// ---------------
+//------------------------------------------------------------------------
+
+$mainColor: hsla(162, 21%, 90%, 0.3)
+
+.bg div
+	background: $mainColor
+	background-clip: content-box
+
+//------------------------------------------------------------------------
+// Print:
+//------------------------------------------------------------------------
+
+@media print 
+	body
+		background: transparent
+		
+	#a4
+		border: 0
+		box-shadow: none
+		margin: 0 auto
+
+@page
+	size: $width $height
+	margin: 0
+	padding: 0
+
+//------------------------------------------------------------------------
 
 .hr
 	height: 4mm
@@ -122,20 +145,11 @@ body
 	
 	border-top-#{$dir}-radius: 10mm
 
-$mainColor: hsla(162, 21%, 90%, 0.5)
-
-.bg div
-	background: $mainColor
-	background-clip: content-box
-
 .box 
 	border: 3px solid $mainColor
 	border-top: 0px
 	background: hsla(0,100%,100%,0.2)
 	border-top: 1px solid gray
-
-.nv
-	margin: 0
 
 
 // Lists:
