@@ -8,9 +8,9 @@ $dev : false
 // Variables:
 //------------------------------------------------------------------------
 
-$direction : rtl
+$direction : ltr
 $background : url(/test_images/main-back_1.gif) repeat 0 0
-$list_image : url('/test_images/bluesmallstar.gif')
+$list_image : url(/test_images/bluesmallstar.gif)
 
 // A4 Page: 
 
@@ -18,6 +18,10 @@ $width: 210mm
 $height: 297mm
 $padding: 10mm
 
+// H1-H6
+$headers : 30px , 25px , 20px , 18px , 16px , 14px
+
+$border-radius : 10mm
 //------------------------------------------------------------------------
 
 @function dir ()
@@ -45,6 +49,15 @@ $udir : udir()
 body
 	direction: $direction
 	background: $background	
+
+ul , ol
+	text-align : $dir
+	line-height: 1
+
+
+@for $x from 1 through 6
+	h#{$x}
+		font-size: nth($headers, $x)
 
 #a4
 	width: $width
@@ -74,22 +87,24 @@ body
 					border: 3px dotted rgba(0,0,0,0.8)
 
 
-@for $i from 1 through 10
+@for $i from 1 through 20
+
+	$percentage : 0.5%
+
 	.p-#{$i}
-		width : $width - ($padding * 2) + $i*1mm
+		width : 100% + $i*$percentage
 		margin-left: auto
-		margin-right: auto
-		//width: 100%
+		margin-right: auto 		
 	.p-#{$i}>div
-		padding-#{$udir}: $i*1mm
+		padding-#{$udir}: $i*$percentage
 
 	.m-t-#{$i}>div
-		margin-top:    $i*1mm
+		margin-top:    $i*$percentage
 	.m-b-#{$i}>div
-		margin-bottom: $i*1mm
+		margin-bottom: $i*$percentage
 	.m-#{$i}>div
-		margin-top:    $i*1mm
-		margin-bottom: $i*1mm 
+		margin-top:    $i*$percentage
+		margin-bottom: $i*$percentage 
 
 @for $x from 1 through 20
 
@@ -103,18 +118,62 @@ body
 			line-height: $h
 
 			@if $dev
-				background: rgba(255,0,0,0.2)		
+				background: rgba(255,0,0,0.2)
 
 
 //------------------------------------------------------------------------
 // Special Styles:
 //------------------------------------------------------------------------
 
-$mainColor: hsla(162, 21%, 90%, 0.3)
+$mainColor: hsla(162, 21%, 90%, 0.5)
 
-.bg div
-	background: $mainColor
-	background-clip: content-box
+$colorlist : Black , Blue , Green , Aqua , Red , Purple , Yellow , White , Gray ,LightBlue , LightGreen , LightCyan , LightCoral , MediumPurple , Khaki, Wheat 
+
+$i:1
+@each $color in $colorlist
+	$x : $i - 1
+
+	.bg-#{$x}>div
+		background: rgba(nth($colorlist, $i),0.9)
+		background-clip: content-box		
+	
+	.bg-o-#{$x}>div
+		background: rgba(nth($colorlist, $i),0.5)
+		background-clip: content-box		
+
+	.bg-oo-#{$x}>div
+		background: rgba(nth($colorlist, $i),0.3)
+		background-clip: content-box		
+
+	.ts-#{$x}
+		text-shadow: 1px 1px 5px nth($colorlist, $i)
+
+	$i : $i + 1
+
+@for $i from 1 through 10
+	.hr-#{$i}
+		height: $i*1mm
+		width: 100%
+
+.bdrs>div
+	border-top-#{$udir}-radius: $border-radius
+
+
+// lists
+
+.lb
+	li
+		list-style-image: $list_image
+		list-style-position: inside
+
+.ld li //:not(:last-of-type)
+	border-bottom: 1px dotted black
+	clear: both
+
+@for $i from 1 through 10
+	.lp-#{$i} li
+		padding-#{$dir}: $i*1mm
+
 
 //------------------------------------------------------------------------
 // Print:
@@ -136,15 +195,6 @@ $mainColor: hsla(162, 21%, 90%, 0.3)
 
 //------------------------------------------------------------------------
 
-.hr
-	height: 4mm
-	border-top-right-radius: 10mm
-	border-top-left-radius: 10mm
-
-.bdrs 
-	
-	border-top-#{$dir}-radius: 10mm
-
 .box 
 	border: 3px solid $mainColor
 	border-top: 0px
@@ -152,25 +202,7 @@ $mainColor: hsla(162, 21%, 90%, 0.3)
 	border-top: 1px solid gray
 
 
-// Lists:
-
-ul , ol
-	text-align : $dir
-	line-height: 1
-
-.dotted-hr li:not(:last-of-type)
-	border-bottom: 1px dotted black
-	clear: both
-	overflow: auto
-
-
-.bullet
-	list-style-image: $list_image
-	list-style-position: inside
-
-	li
-		padding: 1mm 2mm
-
+// Lists
 
 .cc
 	position: relative
@@ -182,10 +214,5 @@ ul , ol
 	left: 5px
 
 
-h1
-	font-size: 25px
-	text-shadow: 1px 1px 5px gray
 
-h2
-	font-size: 20px
-	text-shadow: 1px 1px 5px gray
+
